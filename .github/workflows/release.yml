@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  next-version:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@919008cf3f741b179569b7a6fb4d8860689ab7f0
+        with:
+          fetch-depth: 0
+
+      - name: Release
+        uses: mehdi-ra/main-develop-semver@a72752066126879a5ca505f0d0a733ed9e9602e1
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          releaseTitle: Auto release
